@@ -28,10 +28,12 @@ def add_trip_log(route_id, passenger_count, logs=None):
 
 
 def remove_route(route_id):
+    """Remove a route from the fleet."""
     del routes[route_id]
 
 
 def average_load(route_id):
+    """Calculate the average passenger load for a route."""
     trips = routes[route_id]["trips"]
     return sum(trips) / len(trips)
 
@@ -65,16 +67,19 @@ def assign_driver():
 
 
 def sync_fleet_data(file="fleet.json"):
-    global routes
-
+    """Save fleet data to JSON and reload it
+    into the shared route dictionary."""
     with open(file, "w", encoding="utf-8") as fleet_file:
         json.dump(routes, fleet_file)
-
     with open(file, "r", encoding="utf-8") as fleet_file:
-        routes = json.load(fleet_file)
+        loaded_routes = json.load(fleet_file)
+
+    routes.clear()
+    routes.update(loaded_routes)
 
 
 def main():
+    """Run the campus shuttle tracker."""
     add_trip_log("R1", 32)
     add_trip_log("R1", 28)
     add_trip_log("R2", 4)
