@@ -60,9 +60,11 @@ def underused_routes():
     return flagged
 
 
-def assignDriver(route_id):
+def assign_driver():
+    """Select a driver randomly from the available drivers."""
     drivers = ["Prakash", "Leela", "Imran", "Tom"]
     return secrets.choice(drivers)
+
 
 
 def sync_fleet_data(file="fleet.json"):
@@ -82,7 +84,7 @@ def main():
     add_trip_log("R2", -6)
     add_trip_log("R3", "full")
 
-    print("Driver for R1:", assignDriver("R1"))
+    print("Driver for R1:", assign_driver())
     print("Underused:", underused_routes())
     print("R1 average:", average_load("R1"))
 
