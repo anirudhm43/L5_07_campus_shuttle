@@ -20,15 +20,28 @@ def average_load(route_id):
     trips = routes[route_id]["trips"]
     return sum(trips) / len(trips)
 
+
 def underused_routes():
+    """Return routes with valid average passenger loads below capacity."""
     flagged = []
-    for r in routes:
-        try:
-            if average_load(r) < MIN_CAPACITY:
-                flagged.append(r)
-        except:
-            pass
+
+    for route_id, route_data in routes.items():
+        trips = route_data["trips"]
+
+        if not trips:
+            continue
+
+        if not all(
+            isinstance(count, (int, float)) and not isinstance(count, bool)
+            for count in trips
+        ):
+            continue
+
+        if average_load(route_id) < MIN_CAPACITY:
+            flagged.append(route_id)
+
     return flagged
+
 
 def assignDriver(route_id):
     drivers = ["Prakash", "Leela", "Imran", "Tom"]
