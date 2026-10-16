@@ -15,7 +15,6 @@ routes = {
 MIN_CAPACITY = 10
 
 
-
 def add_trip_log(route_id, passenger_count, logs=None):
     """Record a passenger count for a route and return the log entries."""
     if logs is None:
@@ -26,7 +25,6 @@ def add_trip_log(route_id, passenger_count, logs=None):
         f"{datetime.now()}: {route_id} carried {passenger_count}"
     )
     return logs
-
 
 
 def remove_route(route_id):
@@ -64,7 +62,6 @@ def assign_driver():
     """Select a driver randomly from the available drivers."""
     drivers = ["Prakash", "Leela", "Imran", "Tom"]
     return secrets.choice(drivers)
-
 
 
 def sync_fleet_data(file="fleet.json"):
