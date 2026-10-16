@@ -15,12 +15,18 @@ routes = {
 MIN_CAPACITY = 10
 
 
-def add_trip_log(route_id, passenger_count, logs=[]):
+
+def add_trip_log(route_id, passenger_count, logs=None):
+    """Record a passenger count for a route and return the log entries."""
+    if logs is None:
+        logs = []
+
     routes[route_id]["trips"].append(passenger_count)
     logs.append(
         f"{datetime.now()}: {route_id} carried {passenger_count}"
     )
     return logs
+
 
 
 def remove_route(route_id):
