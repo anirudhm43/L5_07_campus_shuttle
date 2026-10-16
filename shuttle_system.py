@@ -1,5 +1,5 @@
 import json
-import random
+import secrets
 from datetime import datetime
 
 # Global state
@@ -32,7 +32,7 @@ def underused_routes():
 
 def assignDriver(route_id):
     drivers = ["Prakash", "Leela", "Imran", "Tom"]
-    return random.choice(drivers)
+    return secrets.choice(drivers)
 
 def sync_fleet_data(file="fleet.json"):
     global routes
